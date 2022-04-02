@@ -9,3 +9,13 @@ export const generarID = () => {
   const fecha = Date.now().toString(36);
   return random + fecha;
 };
+
+export const formatDate = date => {
+  const fechaNueva = new Date(date);
+  const opciones = {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  };
+  return fechaNueva.toLocaleDateString('es-ES', opciones);
+};

@@ -38,6 +38,8 @@ const App = () => {
 
     // Añadir el gasto al state
     gasto.id = generarID();
+    gasto.fecha = Date.now();
+
     setGastos([...gastos, gasto]);
     setModal(!modal);
   };
