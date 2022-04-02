@@ -14,25 +14,32 @@ const iconos = {
   gastos: require('../img/icono_gastos.png'),
 };
 
-const Gasto = ({gasto}) => {
+const Gasto = ({gasto, setModal, setGasto}) => {
   const {nombre, categoria, cantidad, fecha} = gasto;
 
+  const handleActions = () => {
+    setModal(true);
+    setGasto(gasto);
+  };
+
   return (
-    <View style={styles.contenedor}>
-      <View style={styles.contenido}>
-        <View style={styles.contenedorImagen}>
-          <Image style={styles.imagen} source={iconos[categoria]} />
+    <Pressable onLongPress={handleActions}>
+      <View style={styles.contenedor}>
+        <View style={styles.contenido}>
+          <View style={styles.contenedorImagen}>
+            <Image style={styles.imagen} source={iconos[categoria]} />
 
-          <View style={styles.contenedorTexto}>
-            <Text style={styles.categoria}>{categoria}</Text>
-            <Text style={styles.nombre}>{nombre}</Text>
-            <Text style={styles.fecha}>Fecha: {formatDate(fecha)}</Text>
+            <View style={styles.contenedorTexto}>
+              <Text style={styles.categoria}>{categoria}</Text>
+              <Text style={styles.nombre}>{nombre}</Text>
+              <Text style={styles.fecha}>Fecha: {formatDate(fecha)}</Text>
+            </View>
           </View>
-        </View>
 
-        <Text style={styles.cantidad}>{formatCurrency(cantidad)}</Text>
+          <Text style={styles.cantidad}>{formatCurrency(cantidad)}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

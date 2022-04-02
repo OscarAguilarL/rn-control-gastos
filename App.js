@@ -21,6 +21,7 @@ const App = () => {
   const [presupuesto, setPresupuesto] = useState('');
   const [gastos, setGastos] = useState([]);
   const [modal, setModal] = useState(false);
+  const [gasto, setGasto] = useState({});
 
   const handleNuevoPresupuesto = presupuesto => {
     if (Number(presupuesto) > 0) {
@@ -63,7 +64,9 @@ const App = () => {
           )}
         </View>
 
-        {isPresupuestoValid && <ListadoGastos gastos={gastos} />}
+        {isPresupuestoValid && (
+          <ListadoGastos gastos={gastos} setModal={setModal} setGasto={setGasto} />
+        )}
       </ScrollView>
 
       {modal && (
@@ -74,6 +77,7 @@ const App = () => {
           <FormularioGasto
             setModal={setModal}
             handleNuevoGasto={handleNuevoGasto}
+            setGasto={setGasto}
           />
         </Modal>
       )}
