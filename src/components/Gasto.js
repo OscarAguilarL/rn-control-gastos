@@ -19,15 +19,17 @@ const Gasto = ({gasto}) => {
 
   return (
     <View style={styles.contenedor}>
-      <View>
-        <Image source={iconos[categoria]} />
+      <View style={styles.contenido}>
+        <View style={styles.contenedorImagen}>
+          <Image style={styles.imagen} source={iconos[categoria]} />
 
-        <View>
-          <Text>{categoria}</Text>
-          <Text>{nombre}</Text>
+          <View style={styles.contenedorTexto}>
+            <Text style={styles.categoria}>{categoria}</Text>
+            <Text style={styles.nombre}>{nombre}</Text>
+          </View>
         </View>
 
-        <Text>{formatCurrency(cantidad)}</Text>
+        <Text style={styles.cantidad}>{formatCurrency(cantidad)}</Text>
       </View>
     </View>
   );
@@ -38,5 +40,41 @@ export default Gasto;
 const styles = StyleSheet.create({
   contenedor: {
     ...globalStyles.contenedor,
+    marginBottom: 30,
+  },
+  contenido: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  contenedorImagen: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  imagen: {
+    width: 80,
+    height: 80,
+    marginRight: 20,
+  },
+  contenedorTexto: {
+    flex: 1,
+  },
+  categoria: {
+    color: '#94a3b8',
+    fontSize: 16,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    marginBottom: 5,
+  },
+  nombre: {
+    fontSize: 22,
+    color: '#64748b',
+    marginBottom: 5,
+  },
+  cantidad: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#000',
   },
 });
