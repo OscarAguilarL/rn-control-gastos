@@ -38,8 +38,10 @@ const App = () => {
     }
 
     if (gasto.id) {
-      const gastoActualizado = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
-      setGastos(gastoActualizado)
+      const gastoActualizado = gastos.map(gastoState =>
+        gastoState.id === gasto.id ? gasto : gastoState,
+      );
+      setGastos(gastoActualizado);
     } else {
       // Añadir el gasto al state
       gasto.id = generarID();
@@ -48,6 +50,27 @@ const App = () => {
     }
 
     setModal(!modal);
+  };
+
+  const eliminarGasto = id => {
+    Alert.alert(
+      '¿Estás seguro?',
+      'Una vez eliminado no hay forma de recuperarlo',
+      [
+        {text: 'No', style: 'cancel'},
+        {
+          text: 'Si, eliminar.',
+          onPress: () => {
+            const gastosActualizados = gastos.filter(
+              gastoState => gastoState.id !== id,
+            );
+            setGastos(gastosActualizados);
+            setModal(!modal);
+            setGasto({});
+          },
+        },
+      ],
+    );
   };
 
   return (
@@ -88,6 +111,7 @@ const App = () => {
             handleNuevoGasto={handleNuevoGasto}
             gasto={gasto}
             setGasto={setGasto}
+            eliminarGasto={eliminarGasto}
           />
         </Modal>
       )}
