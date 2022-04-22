@@ -22,7 +22,7 @@ export default ListadoGastos;
 
 const styles = StyleSheet.create({
   contenedor: {
-    marginTop: 70,
+    marginTop: 20,
     marginBottom: 100,
   },
   titulo: {

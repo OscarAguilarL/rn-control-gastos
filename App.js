@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import ControlPresupuesto from './src/components/ControlPresupuesto';
+import Filtro from './src/components/Filtro';
 import FormularioGasto from './src/components/FormularioGasto';
 import Header from './src/components/Header';
 import ListadoGastos from './src/components/ListadoGastos';
@@ -93,11 +94,15 @@ const App = () => {
         </View>
 
         {isPresupuestoValid && (
-          <ListadoGastos
-            gastos={gastos}
-            setModal={setModal}
-            setGasto={setGasto}
-          />
+          <>
+            <Filtro />
+
+            <ListadoGastos
+              gastos={gastos}
+              setModal={setModal}
+              setGasto={setGasto}
+            />
+          </>
         )}
       </ScrollView>
 
