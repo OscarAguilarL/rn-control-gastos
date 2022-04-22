@@ -108,6 +108,8 @@ const App = () => {
               gastos={gastos}
               setModal={setModal}
               setGasto={setGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </>
         )}
