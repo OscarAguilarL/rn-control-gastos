@@ -15,6 +15,7 @@ const FormularioGasto = ({setModal, handleNuevoGasto, setGasto, gasto}) => {
   const [cantidad, setCantidad] = useState('');
   const [categoria, setCategoria] = useState('');
   const [id, setId] = useState('');
+  const [fecha, setFecha] = useState('');
 
   useEffect(() => {
     if (gasto?.nombre) {
@@ -22,6 +23,7 @@ const FormularioGasto = ({setModal, handleNuevoGasto, setGasto, gasto}) => {
       setCantidad(gasto.cantidad);
       setCategoria(gasto.categoria);
       setId(gasto.id);
+      setFecha(gasto.fecha);
     }
   }, [gasto]);
 
@@ -70,9 +72,9 @@ const FormularioGasto = ({setModal, handleNuevoGasto, setGasto, gasto}) => {
 
         <Pressable
           style={styles.submitBtn}
-          onPress={() => handleNuevoGasto({nombre, cantidad, categoria})}>
+          onPress={() => handleNuevoGasto({nombre, cantidad, categoria, id, fecha})}>
           <Text style={styles.btnTexto}>
-            {gasto?.nombre ? 'Editar' : 'Nuevo'} gasto
+            {gasto?.nombre ? 'Guardar cambios' : 'Guardar concepto'}
           </Text>
         </Pressable>
 

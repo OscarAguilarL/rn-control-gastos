@@ -32,16 +32,21 @@ const App = () => {
   };
 
   const handleNuevoGasto = gasto => {
-    if (Object.values(gasto).includes('')) {
+    if ([gasto.nombre, gasto.cantidad, gasto.categoria].includes('')) {
       Alert.alert('Error', 'Todos los campos son obligatorios');
       return;
     }
 
-    // Añadir el gasto al state
-    gasto.id = generarID();
-    gasto.fecha = Date.now();
+    if (gasto.id) {
+      const gastoActualizado = gastos.map(gastoState => gastoState.id === gasto.id ? gasto : gastoState)
+      setGastos(gastoActualizado)
+    } else {
+      // Añadir el gasto al state
+      gasto.id = generarID();
+      gasto.fecha = Date.now();
+      setGastos([...gastos, gasto]);
+    }
 
-    setGastos([...gastos, gasto]);
     setModal(!modal);
   };
 
@@ -65,7 +70,11 @@ const App = () => {
         </View>
 
         {isPresupuestoValid && (
-          <ListadoGastos gastos={gastos} setModal={setModal} setGasto={setGasto} />
+          <ListadoGastos
+            gastos={gastos}
+            setModal={setModal}
+            setGasto={setGasto}
+          />
         )}
       </ScrollView>
 
