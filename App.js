@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -9,6 +9,8 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import ControlPresupuesto from './src/components/ControlPresupuesto';
 import Filtro from './src/components/Filtro';
 import FormularioGasto from './src/components/FormularioGasto';
@@ -25,6 +27,15 @@ const App = () => {
   const [gasto, setGasto] = useState({});
   const [filtro, setFiltro] = useState('');
   const [gastosFiltrados, setGastosFiltrados] = useState([]);
+
+  useEffect(() => {
+    const almacenarAS = async () => {
+      const nombre = 'oscar';
+      await AsyncStorage.setItem('pruebaAS', nombre);
+      console.log('alamacenado');
+    };
+    almacenarAS();
+  }, []);
 
   const handleNuevoPresupuesto = presupuesto => {
     if (Number(presupuesto) > 0) {
