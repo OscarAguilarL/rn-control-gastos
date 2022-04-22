@@ -29,8 +29,15 @@ const FormularioGasto = ({setModal, handleNuevoGasto, setGasto, gasto}) => {
 
   return (
     <SafeAreaView style={styles.contenedor}>
+      <View
+        style={{
+          marginHorizontal: 10,
+        }}></View>
+
       <View style={styles.formulario}>
-        <Text style={styles.titulo}>{gasto?.nombre ? 'Editar' : 'Nuevo'} gasto</Text>
+        <Text style={styles.titulo}>
+          {gasto?.nombre ? 'Editar' : 'Nuevo'} gasto
+        </Text>
 
         <View style={styles.campo}>
           <Text style={styles.label}>Motivo del gasto</Text>
@@ -72,20 +79,28 @@ const FormularioGasto = ({setModal, handleNuevoGasto, setGasto, gasto}) => {
 
         <Pressable
           style={styles.submitBtn}
-          onPress={() => handleNuevoGasto({nombre, cantidad, categoria, id, fecha})}>
+          onPress={() =>
+            handleNuevoGasto({nombre, cantidad, categoria, id, fecha})
+          }>
           <Text style={styles.btnTexto}>
             {gasto?.nombre ? 'Guardar cambios' : 'Guardar concepto'}
           </Text>
         </Pressable>
 
-        <Pressable
-          style={styles.btnCancelar}
-          onLongPress={() => {
-            setModal(false);
-            setGasto({});
-          }}>
-          <Text style={styles.btnTexto}>Cancelar</Text>
-        </Pressable>
+        <View style={styles.contenedorBtn}>
+          <Pressable
+            style={[styles.btn, styles.btnCancelar]}
+            onLongPress={() => {
+              setModal(false);
+              setGasto({});
+            }}>
+            <Text style={styles.btnTexto}>Cancelar</Text>
+          </Pressable>
+
+          <Pressable style={[styles.btn, styles.btnEliminar]}>
+            <Text style={styles.btnTexto}>Eliminar</Text>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -97,6 +112,22 @@ const styles = StyleSheet.create({
   contenedor: {
     backgroundColor: '#1e40af',
     flex: 1,
+  },
+  contenedorBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  btn: {
+    padding: 10,
+    marginTop: 20,
+    borderRadius: 10,
+    width: '48%'
+  },
+  btnEliminar: {
+    backgroundColor: 'red',
+  },
+  btnCancelar: {
+    backgroundColor: '#db2777',
   },
   formulario: {...globalStyles.contenedor},
   titulo: {
@@ -122,12 +153,6 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: '#3b82f6',
-    padding: 10,
-    marginTop: 20,
-    borderRadius: 10,
-  },
-  btnCancelar: {
-    backgroundColor: '#db2777',
     padding: 10,
     marginTop: 20,
     borderRadius: 10,
