@@ -95,7 +95,7 @@ const FormularioGasto = ({
 
         <View style={styles.contenedorBtn}>
           <Pressable
-            style={[styles.btn, styles.btnCancelar]}
+            style={[styles.btn, styles.btnCancelar, !id && styles.btnBlock]}
             onLongPress={() => {
               setModal(false);
               setGasto({});
@@ -103,11 +103,13 @@ const FormularioGasto = ({
             <Text style={styles.btnTexto}>Cancelar</Text>
           </Pressable>
 
-          <Pressable
-            style={[styles.btn, styles.btnEliminar]}
-            onLongPress={() => eliminarGasto(id)}>
-            <Text style={styles.btnTexto}>Eliminar</Text>
-          </Pressable>
+          {!!id && (
+            <Pressable
+              style={[styles.btn, styles.btnEliminar]}
+              onLongPress={() => eliminarGasto(id)}>
+              <Text style={styles.btnTexto}>Eliminar</Text>
+            </Pressable>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -130,6 +132,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 10,
     width: '48%',
+  },
+  btnBlock: {
+    width: '100%'
   },
   btnEliminar: {
     backgroundColor: 'red',
