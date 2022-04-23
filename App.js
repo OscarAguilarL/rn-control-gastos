@@ -29,13 +29,17 @@ const App = () => {
   const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
   useEffect(() => {
-    const almacenarAS = async () => {
-      const nombre = 'oscar';
-      await AsyncStorage.setItem('pruebaAS', nombre);
-      console.log('alamacenado');
-    };
-    almacenarAS();
-  }, []);
+    if (isPresupuestoValid) {
+      const guardarPresupuestoStorage = async () => {
+        try {
+          await AsyncStorage.setItem('control_presupuesto', presupuesto);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      guardarPresupuestoStorage();
+    }
+  }, [isPresupuestoValid]);
 
   const handleNuevoPresupuesto = presupuesto => {
     if (Number(presupuesto) > 0) {
