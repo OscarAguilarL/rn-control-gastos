@@ -6,7 +6,6 @@ import {
   Pressable,
   Image,
   Modal,
-  Text,
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -133,6 +132,26 @@ const App = () => {
     );
   };
 
+  const resetearApp = () => {
+    Alert.alert('¿Estás seguro?', '¡Esta acción es irreversible!', [
+      {text: 'Cancelar', style: 'cancel'},
+      {
+        text: 'Si, continuar',
+        onPress: async () => {
+          try {
+            await AsyncStorage.clear();
+
+            setIsPresupuestoValid(false);
+            setPresupuesto(0);
+            setGastos([]);
+          } catch (err) {
+            console.log(err);
+          }
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={styles.contenedor}>
       <ScrollView>
@@ -141,7 +160,11 @@ const App = () => {
 
           {isPresupuestoValid ? (
             <>
-              <ControlPresupuesto presupuesto={presupuesto} gastos={gastos} />
+              <ControlPresupuesto
+                presupuesto={presupuesto}
+                gastos={gastos}
+                resetearApp={resetearApp}
+              />
             </>
           ) : (
             <NuevoPresupuesto
